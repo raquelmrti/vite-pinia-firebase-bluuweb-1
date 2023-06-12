@@ -10,3 +10,4 @@ This is a project from Ignacio bluuweb's Udemy Course, [Vue js 3 Actualizado Des
 - Implemented user sign out with Firebase's `signOut` method.
 - Added `currentUser` method to the store, which we can use to get the user data each time the auth status changes (`onAuthStateChanged`).
 - Added navigation guard to `HomeView` so that only logged in users can access it.
+- Made `databaseStore` and added a Firestore database to store documents.

@@ -1,5 +1,6 @@
 import { initializeApp } from "firebase/app"
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth"
+import { getFirestore } from "firebase/firestore/lite"
 
 const firebaseConfig = {
   apiKey: "AIzaSyD3UhkNPY1HRFelntVChzr61rbTTf6F_wM",
@@ -12,5 +13,6 @@ const firebaseConfig = {
 
 initializeApp(firebaseConfig)
 const auth = getAuth()
+const db = getFirestore()
 
-export { auth }
+export { auth, db }

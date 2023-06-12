@@ -7,6 +7,7 @@ import {
   onAuthStateChanged,
 } from "firebase/auth"
 import { auth } from "../firebaseConfig"
+import { useDatabaseStore } from "./databaseStore"
 
 export const useUserStore = defineStore("userStore", {
   state: () => ({
@@ -44,6 +45,8 @@ export const useUserStore = defineStore("userStore", {
       }
     },
     async logoutUser() {
+      const databaseStore = useDatabaseStore()
+      databaseStore.$reset()
       try {
         await signOut(auth)
         // Dejamos userData en null, de lo contrario, nuestra store
@@ -63,6 +66,8 @@ export const useUserStore = defineStore("userStore", {
               this.userData = { email: user.email, uid: user.uid }
             } else {
               this.userData = null
+              const databaseStore = useDatabaseStore()
+              databaseStore.$reset()
             }
             resolve(user)
           },

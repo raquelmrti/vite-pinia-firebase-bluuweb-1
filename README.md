@@ -11,3 +11,5 @@ This is a project from Ignacio bluuweb's Udemy Course, [Vue js 3 Actualizado Des
 - Added `currentUser` method to the store, which we can use to get the user data each time the auth status changes (`onAuthStateChanged`).
 - Added navigation guard to `HomeView` so that only logged in users can access it.
 - Made `databaseStore` and added a Firestore database to store documents.
+- Displayed the data from the database in `HomeView`.
+- Used the `$reset` method in the user store to reset the data in the database store when the user logs out.

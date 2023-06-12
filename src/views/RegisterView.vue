@@ -1,8 +1,10 @@
 <script setup>
 import { ref } from "vue"
 import { useUserStore } from "../stores/userStore"
+import { useRouter } from "vue-router"
 
 const userStore = useUserStore()
+const router = useRouter()
 
 const email = ref("email@gmail.com")
 const password = ref("password123")
@@ -12,6 +14,7 @@ const handleSubmit = async () => {
     return alert("Llena ambos campos y asegúrate de que la contraseña contiene al menos 5 caracteres.")
   }
   await userStore.registerUser(email.value, password.value)
+  router.push("/")
 };
 </script>
 
@@ -23,5 +26,3 @@ const handleSubmit = async () => {
     <button type="submit">Crear usuario</button>
   </form>
 </template>
-
-<style scoped></style>

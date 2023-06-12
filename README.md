@@ -6,5 +6,7 @@ This is a project from Ignacio bluuweb's Udemy Course, [Vue js 3 Actualizado Des
 
 - Set up the structure of the project and the router.
 - Set up `userStore` (there will be user register and auth). We're using an Options Store, so there's state, getters and actions.
-- Implement user registration and log in with Firebase. We made two actions, (`registerUser` and `loginUser`) in the user store that contain Firebase's `createUserWithEmailAndPassword` and `signInWithEmailAndPassword` methods.
-- Implement user sign out with Firebase's `signOut` method.
+- Implemented user registration and log in with Firebase. We made two actions, (`registerUser` and `loginUser`) in the user store that contain Firebase's `createUserWithEmailAndPassword` and `signInWithEmailAndPassword` methods.
+- Implemented user sign out with Firebase's `signOut` method.
+- Added `currentUser` method to the store, which we can use to get the user data each time the auth status changes (`onAuthStateChanged`).
+- Added navigation guard to `HomeView` so that only logged in users can access it.

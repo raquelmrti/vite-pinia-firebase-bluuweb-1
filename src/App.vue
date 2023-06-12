@@ -1,5 +1,6 @@
 <script setup>
-
+import { useUserStore } from './stores/userStore';
+const userStore = useUserStore()
 </script>
 
 <template>
@@ -8,7 +9,7 @@
 <router-link to="/">Home</router-link> |
 <router-link to="/register">Register</router-link> |
 <router-link to="/login">Log In</router-link> |
-<button>Log Out</button>
+<button @click="userStore.logoutUser">Log Out</button>
 </nav>
 
 <router-view></router-view>

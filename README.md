@@ -5,3 +5,4 @@ This is a project from Ignacio bluuweb's Udemy Course, [Vue js 3 Actualizado Des
 ### **12/06/2023:**
 
 - Set up the structure of the project and the router.
+- Set up `userStore` (there will be user register and auth). We're using an Options Store, so there's state, getters and actions.

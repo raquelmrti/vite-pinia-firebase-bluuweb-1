@@ -6,3 +6,4 @@ This is a project from Ignacio bluuweb's Udemy Course, [Vue js 3 Actualizado Des
 
 - Set up the structure of the project and the router.
 - Set up `userStore` (there will be user register and auth). We're using an Options Store, so there's state, getters and actions.
+- Implement user registration with Firebase. We made an action `registerUser` in the user store that contains Firebase's `createUserWithEmailAndPassword` method.

@@ -12,4 +12,6 @@ This is a project from Ignacio bluuweb's Udemy Course, [Vue js 3 Actualizado Des
 - Added navigation guard to `HomeView` so that only logged in users can access it.
 - Made `databaseStore` and added a Firestore database to store documents.
 - Displayed the data from the database in `HomeView`.
+  - **IMPORTANT:** We must use `where("user", "==", auth.currentUser.uid)` in the database query so it only gets the documents from the currently authenticated user.
 - Used the `$reset` method in the user store to reset the data in the database store when the user logs out.
+- Made the `addUrl` function to add documents to our urls collection via an HTML input.

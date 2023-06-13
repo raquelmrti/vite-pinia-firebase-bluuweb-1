@@ -1,7 +1,8 @@
-import { collection, getDocs, query, where } from "firebase/firestore/lite"
+import { collection, getDocs, addDoc, query, where } from "firebase/firestore/lite"
 import { db } from "../firebaseConfig"
 import { defineStore } from "pinia"
 import { auth } from "../firebaseConfig"
+import { nanoid } from "nanoid"
 
 export const useDatabaseStore = defineStore("databaseStore", {
   state: () => ({
@@ -36,5 +37,25 @@ export const useDatabaseStore = defineStore("databaseStore", {
       this.loadingDoc = false
       }
     },
+    async addUrl(name) {
+      try {
+        const objectDoc = {
+          // name: name
+          name,
+          short: nanoid(6),
+          user: auth.currentUser.uid,
+        }
+        const docRef = await addDoc(collection(db, "urls"), objectDoc)
+        // docRef has an auto generated id, so we use it for our object
+        this.documents.push({
+          ...objectDoc,
+          id: docRef.id
+        })
+      } catch (error) {
+          console.log(error)
+      } finally {
+
+      }
+    }
   },
 })

@@ -15,3 +15,4 @@ This is a project from Ignacio bluuweb's Udemy Course, [Vue js 3 Actualizado Des
   - **IMPORTANT:** We must use `where("user", "==", auth.currentUser.uid)` in the database query so it only gets the documents from the currently authenticated user.
 - Used the `$reset` method in the user store to reset the data in the database store when the user logs out.
 - Made the `addUrl` function to add documents to our urls collection via an HTML input.
+- Made the `deleteUrl` function to delete documents from our urls collection. We made sure to verify that the document being deleted belongs to the currently authenticated user, though it's still not fully secure yet.

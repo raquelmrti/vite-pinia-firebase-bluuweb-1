@@ -1,4 +1,4 @@
-import { collection, getDocs, addDoc, query, where } from "firebase/firestore/lite"
+import { collection, doc, getDoc, getDocs, addDoc, deleteDoc, query, where } from "firebase/firestore/lite"
 import { db } from "../firebaseConfig"
 import { defineStore } from "pinia"
 import { auth } from "../firebaseConfig"
@@ -24,7 +24,7 @@ export const useDatabaseStore = defineStore("databaseStore", {
         )
         const querySnapshot = await getDocs(q)
         querySnapshot.forEach((doc) => {
-          console.log(doc.id, doc.data())
+          // console.log(doc.id, doc.data())
           this.documents.push({
             id: doc.id,
             // pushing a copy of the data object
@@ -53,6 +53,26 @@ export const useDatabaseStore = defineStore("databaseStore", {
         })
       } catch (error) {
           console.log(error)
+      } finally {
+      }
+    },
+    async deleteUrl(id) {
+      try {
+        const docRef = doc(db, "urls", id)
+
+        const docSnap = await getDoc(docRef)
+        if (!docSnap.exists()) {
+          throw new Error("Doc doesn't exist.")
+        }
+
+        if (docSnap.data().user !== auth.currentUser.uid) {
+          throw new Error("No permission to delete this doc")
+        }
+
+        await deleteDoc(docRef)
+        this.documents = this.documents.filter(item => item.id !== id)
+      } catch (error) {
+        console.log(error.message)
       } finally {
 
       }

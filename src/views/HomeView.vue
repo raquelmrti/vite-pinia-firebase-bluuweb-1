@@ -28,8 +28,10 @@ const handleSubmit = () => {
   <ul v-else>
     <li v-for="item of databaseStore.documents" :key="item.id">
       <span><strong>ID:</strong> {{ item.id }}</span>
-      <br />
+      <br>
       <span><strong>Name:</strong> {{ item.name }}</span>
+      <br>
+      <button @click="databaseStore.deleteUrl(item.id)">Delete</button>
     </li>
   </ul>
 </template>

@@ -20,3 +20,4 @@ This is a project from Ignacio bluuweb's Udemy Course, [Vue js 3 Actualizado Des
 
 ### **13/06/2023:**
 - Made the `readUrl` and `updateUrl` functions for the user to change the urls when they click the "Edit" button. With `readUrl`, we retreive the url that's stored in the database, and with updateUrl we make the petition to Firebase to update the document (using its `updateDoc` method). We also update the documents array in our code by mapping through it.
+- Added Firestore security rules.

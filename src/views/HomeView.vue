@@ -2,8 +2,11 @@
 import { ref } from "vue";
 import { useUserStore } from "../stores/userStore";
 import { useDatabaseStore } from "../stores/databaseStore";
+import { useRouter } from 'vue-router';
+
 const userStore = useUserStore();
 const databaseStore = useDatabaseStore();
+const router = useRouter();
 
 databaseStore.getUrls();
 
@@ -32,6 +35,7 @@ const handleSubmit = () => {
       <span><strong>Name:</strong> {{ item.name }}</span>
       <br>
       <button @click="databaseStore.deleteUrl(item.id)">Delete</button>
+      <button @click="router.push(`/edit/${item.id}`)">Edit</button>
     </li>
   </ul>
 </template>

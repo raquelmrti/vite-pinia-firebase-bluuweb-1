@@ -2,6 +2,7 @@ import {createRouter, createWebHistory} from 'vue-router'
 import { useUserStore } from './stores/userStore'
 import Register from "./views/RegisterView.vue"
 import Login from './views/LoginView.vue'
+import EditView from './views/EditView.vue'
 
 const requireAuth = async(to, from, next) => {
   const userStore = useUserStore()
@@ -21,6 +22,11 @@ const routes = [
   {
     path: "/",
     component: () => import("./views/HomeView.vue"),
+    beforeEnter: requireAuth,
+  },
+  {
+    path: "/edit/:id",
+    component: EditView,
     beforeEnter: requireAuth,
   },
   { path: "/register", component: Register },

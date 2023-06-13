@@ -1,17 +1,28 @@
-import { collection, doc, getDoc, getDocs, addDoc, deleteDoc, query, where } from "firebase/firestore/lite"
+import {
+  collection,
+  doc,
+  getDoc,
+  getDocs,
+  addDoc,
+  updateDoc,
+  deleteDoc,
+  query,
+  where,
+} from "firebase/firestore/lite"
 import { db } from "../firebaseConfig"
 import { defineStore } from "pinia"
 import { auth } from "../firebaseConfig"
 import { nanoid } from "nanoid"
+import router from "../router"
 
 export const useDatabaseStore = defineStore("databaseStore", {
   state: () => ({
     documents: [],
-    loadingDoc: false
+    loadingDoc: false,
   }),
   actions: {
     async getUrls() {
-      if (this.documents.length !== 0){
+      if (this.documents.length !== 0) {
         return
       }
 
@@ -28,13 +39,13 @@ export const useDatabaseStore = defineStore("databaseStore", {
           this.documents.push({
             id: doc.id,
             // pushing a copy of the data object
-            ...doc.data()
+            ...doc.data(),
           })
         })
       } catch (error) {
         console.log(error)
       } finally {
-      this.loadingDoc = false
+        this.loadingDoc = false
       }
     },
     async addUrl(name) {
@@ -49,12 +60,55 @@ export const useDatabaseStore = defineStore("databaseStore", {
         // docRef has an auto generated id, so we use it for our object
         this.documents.push({
           ...objectDoc,
-          id: docRef.id
+          id: docRef.id,
         })
       } catch (error) {
-          console.log(error)
+        console.log(error)
       } finally {
       }
+    },
+    async readUrl(id) {
+      try {
+        const docRef = doc(db, "urls", id)
+        const docSnap = await getDoc(docRef)
+
+        if (!docSnap.exists()) {
+          throw new Error("Doc doesn't exist.")
+        }
+
+        if (docSnap.data().user !== auth.currentUser.uid) {
+          throw new Error("No permission to delete this doc")
+        }
+
+        return docSnap.data().name
+      } catch (error) {
+        console.error(error.message)
+      }
+    },
+    async updateUrl(id, name) {
+     try {
+       const docRef = doc(db, "urls", id)
+       const docSnap = await getDoc(docRef)
+
+       if (!docSnap.exists()) {
+         throw new Error("Doc doesn't exist.")
+       }
+
+       if (docSnap.data().user !== auth.currentUser.uid) {
+         throw new Error("No permission to delete this doc")
+       }
+
+       await updateDoc(docRef, {
+        // name: name
+        name
+       })
+
+       // Changing the documents array to update the elements with matching id
+       this.documents = this.documents.map(item => item.id === id ? ({...item, name: name}) : item)
+       router.push("/")
+     } catch (error) {
+       console.error(error.message)
+     }
     },
     async deleteUrl(id) {
       try {
@@ -70,12 +124,11 @@ export const useDatabaseStore = defineStore("databaseStore", {
         }
 
         await deleteDoc(docRef)
-        this.documents = this.documents.filter(item => item.id !== id)
+        this.documents = this.documents.filter((item) => item.id !== id)
       } catch (error) {
         console.log(error.message)
       } finally {
-
       }
-    }
+    },
   },
 })

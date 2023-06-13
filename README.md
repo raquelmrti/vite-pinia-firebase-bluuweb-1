@@ -16,3 +16,7 @@ This is a project from Ignacio bluuweb's Udemy Course, [Vue js 3 Actualizado Des
 - Used the `$reset` method in the user store to reset the data in the database store when the user logs out.
 - Made the `addUrl` function to add documents to our urls collection via an HTML input.
 - Made the `deleteUrl` function to delete documents from our urls collection. We made sure to verify that the document being deleted belongs to the currently authenticated user, though it's still not fully secure yet.
+
+
+### **13/06/2023:**
+- Made the `readUrl` and `updateUrl` functions for the user to change the urls when they click the "Edit" button. With `readUrl`, we retreive the url that's stored in the database, and with updateUrl we make the petition to Firebase to update the document (using its `updateDoc` method). We also update the documents array in our code by mapping through it.
